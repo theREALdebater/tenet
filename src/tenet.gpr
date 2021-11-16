@@ -1,0 +1,45 @@
+-- Tenet project file
+
+-- Written in 2021 by Nicholas James Roberts <nick.roberts@acm.org>
+
+-- To the extent possible under law, the author(s) have dedicated all copyright and related 
+-- and neighboring rights to this software to the public domain worldwide. This software is 
+-- distributed without any warranty.
+
+-- You should have received a copy of the CC0 Public Domain Dedication along with this 
+-- software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>. 
+
+project tenet is
+
+   for Languages use ("Ada");
+   for Source_Dirs use (".");
+   --for Excluded_Source_Dirs use (".git/**");
+
+   for Source_Files use ("tenet.ads",
+                         "tenet.ads",
+                         "tenet.adb");
+
+   for Object_Dir use "../../obj/tenet";
+
+   package Pretty_Printer is
+      for Default_Switches ("ada") use ("-cl3", "-M135", "--no-separate-is", "--no-separate-loop-then", "--use-on-new-line", "--separate-stmt-name");
+   end Pretty_Printer;
+
+   package Builder is
+      for Default_Switches ("ada") use ("-s", "-g", "-C");
+   end Builder;
+
+   package Compiler is
+      for Default_Switches ("ada") use ("-gnatVa", "-gnatwa", "-gnato", "-fstack-check", "-gnatE", "-gnatf", "-g", "-gnata", "-gnatX");
+   end Compiler;
+
+   package Binder is
+      for Default_Switches ("ada") use ("-E");
+   end Binder;
+
+   package Linker is
+      for Default_Switches ("ada") use ("-g");
+   end Linker;
+
+end tenet;
+
